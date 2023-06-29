@@ -46,13 +46,21 @@ function resetState() {
   }
 
 }
-function selectAnswer(e) {}
+function selectAnswer(e) {
+    const selectedButton = e.target
+    const correct = selectedButton.dataset.correct
+    setStatusClass(document.body, correct)
+    Array.from(answerButtonsElement.children)
+}
 
 const questions = [
 {question: 'What is 2 + 2',
 answers: [
     { text: '4', correct: true },
-    { text: '22', correct: false}
+    { text: '22', correct: false},
+    { text: '20', correct: false},
+    { text: '18', correct: false},
+
     ]
  }
 ]
