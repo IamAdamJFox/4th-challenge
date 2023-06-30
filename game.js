@@ -1,8 +1,10 @@
+
 const question = document.querySelector('#question');
 const choices = Array.from(document.querySelector('.choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
 const progressBarFull = document.querySelector('#progressBarFull');
+
 
 let currentQuestion = {}
 let acceptingAnswers = true
@@ -57,7 +59,7 @@ startGame = () => {
     availableQuestions = [...questions]
     getNewQuestion()
 }
-
+console.log(getNewQuestion);
 getNewQuestion = () => {
     if(availableQuestions.length === 0 || questionsCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score)
@@ -82,15 +84,15 @@ getNewQuestion = () => {
 
     acceptingAnswers = true
 }
-
+console.log(choices);
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
-        if(!acceptingAnswers) return
+        if(!acceptingAnswers()) return
 
         acceptingAnswers = false
         const selectedChoice = e.target
         const selectedAnswer = selectedChoice.dataset['number']
-        
+        console.log ('click')
         let classToApply = selectedAnswer == currentQuestion ? 'correct' : 'incorrect'
 
         if(classToApply === 'correct') {
