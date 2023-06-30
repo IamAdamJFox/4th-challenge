@@ -85,7 +85,7 @@ getNewQuestion = () => {
 
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
-        if(!acceptingAnswers()) return
+        if(!acceptingAnswers) return
 
         acceptingAnswers = false
         const selectedChoice = e.target
