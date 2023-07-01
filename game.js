@@ -119,6 +119,7 @@ incrementScore = num => {
 startGame()
 
 finalScore.innerText = mostRecentScore
+
 username.addEventListener('keyup', () => {
     saveScorebtn.disabled = !username.value
 })
