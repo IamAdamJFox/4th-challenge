@@ -73,13 +73,20 @@ function startTimer() {
     if (timeRemaining <= 0) {
         clearInterval(timerInterval)
         if (timeRemaining <= 0) {
-            clearInterval(timerInterval);
-            acceptingAnswers = false;
-            // Add your logic here when the time is up (e.g., go to the next question)
-            // Example: getNewQuestion();
-            setTimeout(getNewQuestion, 1000);
+            clearInterval(timerInterval)
+            acceptingAnswers = false
+            setTimeout(getNewQuestion, 1000)
           }
     }
+    if (timeRemaining <= 0) {
+        clearInterval(timerInterval);
+        endQuiz();
+      }
+  }
+
+  function endQuiz() {
+    clearInterval(timerInterval);
+    acceptingAnswers = false;
   }
 
 getNewQuestion = () => {
