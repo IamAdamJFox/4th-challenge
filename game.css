@@ -11,7 +11,7 @@ body {
     font-size: 3rem;
     position: relative;
     top: 15rem;
-    min-width: 5rem;
+    min-width: 50rem;
 }
 
 .choice-container:hover {
@@ -57,12 +57,16 @@ body {
     height: 3rem;
     text-align: center;
     font-size: 2rem;
+    position: relative;
 }
 
 .hud-main-text {
     text-align: center;
 }
 
+.hud-node {
+    position: relative;
+}
 
 @media screen and (max-width: 768px) {
     .choice-container {
