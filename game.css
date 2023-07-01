@@ -9,8 +9,9 @@ body {
     border-radius: 4px;
     background: blue;
     font-size: 3rem;
-    min-width: 80rem; 
-
+    position: relative;
+    top: 15rem;
+    min-width: 5rem;
 }
 
 .choice-container:hover {
@@ -42,8 +43,14 @@ body {
 #hud {
     display: flex;
     justify-content: space-between;
+    width: 20rem;
+    height: 3rem;
+    margin-top: 2rem;
+    border-radius: 50px;
+    position: relative;
+    top: 10rem;
+    left: 5rem;
 }
-
 .hud-prefix {
     display: flex;
     width: 20rem;
@@ -94,12 +101,13 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 80rem;
-    margin: 0 auto;
+    
+    margin: auto;
     padding: 2rem;
     max-height: 20rem;
-    
-}
+    position: relative;
+    top: 10rem;
+   }
 
 .flex-column {
     display: flex;
@@ -152,4 +160,8 @@ h2 {
 
 #highscore-btn {
     background: linear-gradient(90deg, yellow 0%, yellow 100%);
+}
+
+#question {
+    position: relative;
 }
