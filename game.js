@@ -9,44 +9,42 @@ const progressBarFull = document.querySelector('#progressBarFull');
 let currentQuestion = {}
 let acceptingAnswers = true
 let score = 0
-let questionsCounter = 0
+let questionCounter = 0
 let availableQuestions = []
 
 let questions = [
-    { question: 'What is 2 + 2?',
+    {
+        question: 'What is 2 + 2?',
         choice1: '2',
         choice2: '4',
         choice3: '21',
         choice4: '17',
         answer: 2,
     },
-    { question: 'What is 5 + 2?',
-        choice1: '7',
-        choice2: '4',
-        choice3: '21',
-        choice4: '17',
+    {
+        question:
+            "The tallest building in the world is located in which city?",
+        choice1: "Dubai",
+        choice2: "New York",
+        choice3: "Shanghai",
+        choice4: "None of the above",
         answer: 1,
     },
-    { question: 'What is 0 + 2?',
-        choice1: '2',
-        choice2: '4',
-        choice3: '21',
-        choice4: '17',
-        answer: 1,
-    },
-    { question: 'What is 15 + 2?',
-        choice1: '2',
-        choice2: '4',
-        choice3: '21',
-        choice4: '17',
-        answer: 4,
-    },
-    { question: 'What is 19 + 2?',
-        choice1: '2',
-        choice2: '4',
-        choice3: '21',
-        choice4: '17',
+    {
+        question: "What percent of American adults believe that chocolate milk comes from brown cows?",
+        choice1: "20%",
+        choice2: "18%",
+        choice3: "7%",
+        choice4: "33%",
         answer: 3,
+    },
+    {
+        question: "Approximately what percent of U.S. power outages are caused by squirrels?",
+        choice1: "10-20%",
+        choice2: "5-10%",
+        choice3: "15-20%",
+        choice4: "30%-40%",
+        answer: 1,
     }
 ]
 
@@ -54,23 +52,23 @@ const SCORE_POINTS = 100
 const MAX_QUESTIONS = 4
 
 startGame = () => {
-    questionsCounter = 0
+    questionCounter = 0
     score = 0
     availableQuestions = [...questions]
     getNewQuestion()
 }
-console.log('getNewQuestion')
+
 getNewQuestion = () => {
-    if(availableQuestions.length === 0 || questionsCounter > MAX_QUESTIONS) {
+    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score)
 
         return window.location.assign('/end.html')
     }
 
-    questionsCounter++
-    progressText.innerText = `Question ${questionsCounter} of ${MAX_QUESTIONS}`
-    progressBarFull.style.width = `${(questionsCounter/MAX_QUESTIONS) * 100}%`
-
+    questionCounter++
+    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
+    progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
+    
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
     currentQuestion = availableQuestions[questionsIndex]
     question.innerText = currentQuestion.question
@@ -84,7 +82,7 @@ getNewQuestion = () => {
 
     acceptingAnswers = true
 }
-console.log(choices);
+
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
         if(!acceptingAnswers) return
@@ -92,8 +90,8 @@ choices.forEach(choice => {
         acceptingAnswers = false
         const selectedChoice = e.target
         const selectedAnswer = selectedChoice.dataset['number']
-        console.log ('click')
-        let classToApply = selectedAnswer == currentQuestion ? 'correct' : 'incorrect'
+
+        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
 
         if(classToApply === 'correct') {
             incrementScore(SCORE_POINTS)
@@ -104,8 +102,14 @@ choices.forEach(choice => {
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply)
             getNewQuestion()
+
         }, 1000)
     })
 })
 
-// incrementScore 
+incrementScore = num => {
+    score +=num
+    scoreText.innerText = score
+}
+
+startGame()
