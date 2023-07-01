@@ -5,7 +5,8 @@ const scoreText = document.querySelector('#score');
 const username = document.querySelector('#username')
 const saveScorebtn = document.querySelector('#saveScoreBtn')
 const finalScore = document.querySelector('#finalScore')
-const mostRecentScore = document.querySelector('#mostRecentScore')
+const mostRecentScore = localStorage.getItem('#mostRecentScore')
+const highScoresList = document.querySelector('#highScoresList')
 
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
 
@@ -116,7 +117,7 @@ incrementScore = num => {
     scoreText.innerText = score
 }
 
-startGame()
+
 
 finalScore.innerText = mostRecentScore
 
@@ -143,3 +144,7 @@ saveHighScore = e => {
     window.location.assign('/')
     }
 
+    highScoresList.innerHTML =
+    highScores.map(score => {
+        return `<li class="high-score">${score.name} - ${score.score}</li>`
+    }).join("")
