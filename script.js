@@ -3,12 +3,17 @@ const question = document.querySelector('#question');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
+const timerElement =document.querySelector('#timer');
+const timePerQuestion = 100; //Time in seconds per question
+const timePenalty = 5; // Time penalty in seconds
 
 let currentQuestion = {}
 let acceptingAnswers = true
 let score = 0
 let questionCounter = 0
 let availableQuestions = []
+let timeRemaining = timePerQuestion;
+let timerInterval;
 
 let questions = [
     {
@@ -53,8 +58,29 @@ startGame = () => {
     questionCounter = 0
     score = 0
     availableQuestions = [...questions]
+    startTimer()
     getNewQuestion()
 }
+
+function startTimer() {
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+
+  function updateTimer() {
+    timeRemaining--
+    timerElement.innerText = `Time: ${timeRemaining}`
+
+    if (timeRemaining <= 0) {
+        clearInterval(timerInterval)
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            acceptingAnswers = false;
+            // Add your logic here when the time is up (e.g., go to the next question)
+            // Example: getNewQuestion();
+            setTimeout(getNewQuestion, 1000);
+          }
+    }
+  }
 
 getNewQuestion = () => {
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
@@ -63,6 +89,8 @@ getNewQuestion = () => {
         return window.location.assign('/end.html')
     }
 
+    if (availableQuestions.length > 0)
+    
     questionCounter++
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
         
@@ -92,7 +120,12 @@ choices.forEach(choice => {
 
         if(classToApply === 'correct') {
             incrementScore(SCORE_POINTS)
-        }
+        } else {
+            timeRemaining -= timePenalty; // Deduct time for incorrect answer
+            if (timeRemaining < 0) {
+              timeRemaining = 0 // Ensure the timer doesn't go negative
+            }
+          }
 
         selectedChoice.parentElement.classList.add(classToApply)
 
