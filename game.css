@@ -10,6 +10,7 @@ body {
     background: blue;
     font-size: 3rem;
     min-width: 80rem; 
+
 }
 
 .choice-container:hover {
@@ -44,6 +45,9 @@ body {
 }
 
 .hud-prefix {
+    display: flex;
+    width: 20rem;
+    height: 3rem;
     text-align: center;
     font-size: 2rem;
 }
@@ -52,16 +56,6 @@ body {
     text-align: center;
 }
 
-#progressBar {
-    width: 20rem;
-    height: 3rem;
-    border: 0.2rem solid green;
-    margin-top: 2rem;
-    border-radius: 50px;
-    overflow: hidden;
-}
-
-
 
 @media screen and (max-width: 768px) {
     .choice-container {
@@ -69,3 +63,93 @@ body {
     }
 }
     
+:root {
+    background-color: black;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-size: 100%;
+font-family: 'Courier New', Courier, monospace;
+
+}
+
+h1 {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 5rem;
+}
+
+h2 {
+    font-size: 4rem;
+    margin-bottom: 4rem;
+
+}
+
+.container {
+    width: 100vw;
+    height: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem;
+    max-height: 20rem;
+    
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.btn {
+    font-size: 2.5rem;
+    padding: 2rem 0;
+    width: 30rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: black;
+    background: linear-gradient(90deg, blue 0%, blue 100%);
+    border-radius: 4px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    box-shadow: 0 1rem 2rem blue;
+    transition: transform 150ms;
+    transform: scale(1);
+}
+
+.btn[disabled]:hover {
+    cursor:not-allowed
+}
+
+#highscore-btn {
+    background: linear-gradient(90deg, yellow 0%, yellow 100%);
+}
+
+#highscore-btn {
+    background: linear-gradient(90deg, yellow 0%, yellow 100%);
+}
