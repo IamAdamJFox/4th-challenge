@@ -137,14 +137,14 @@ function startTimer() {
   function endQuiz() {
     clearInterval(timerInterval)
     acceptingAnswers = false
-    window.location.assign('../end.html') // Redirect to end.html
+    window.location.assign('./end.html') // Redirect to end.html
   }
 // when the quiz ends it clears timer interval, prevents further answers, and redirects to end.html
   function getNewQuestion() {
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score)
 
-        return window.location.assign('/end.html')
+        return window.location.assign('./end.html')
     }
 
     if (timeRemaining <= 0) {
