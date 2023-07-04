@@ -137,7 +137,7 @@ function startTimer() {
   function endQuiz() {
     clearInterval(timerInterval)
     acceptingAnswers = false
-    window.location.assign('/end.html') // Redirect to end.html
+    window.location.assign('../end.html') // Redirect to end.html
   }
 // when the quiz ends it clears timer interval, prevents further answers, and redirects to end.html
   function getNewQuestion() {
