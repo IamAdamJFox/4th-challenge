@@ -6,13 +6,13 @@ const mostRecentScore = localStorage.getItem('mostRecentScore')
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
 
 const MAX_HIGH_SCORES = 5
-
+// max amount of highscores that will be saved
 finalScore.innerText = mostRecentScore
 
 username.addEventListener('keyup', () => {
     saveScoreBtn.disabled = !username.value
 })
-
+//prevents save highscore from being completed with out username being inputed
 saveHighScore = e => {
     e.preventDefault()
 
@@ -34,3 +34,4 @@ saveHighScore = e => {
 
     
 }
+// creates 'score' from username and mostRecentScore then pushes it into highscores then sorts it by the score value before storing it

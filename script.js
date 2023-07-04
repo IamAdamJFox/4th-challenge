@@ -17,42 +17,91 @@ let timerInterval;
 
 let questions = [
     {
-        question: 'What is 2 + 2?',
-        choice1: '2',
-        choice2: '4',
-        choice3: '21',
-        choice4: '17',
-        answer: 2,
-    },
-    {
-        question:
-            "The tallest building in the world is located in which city?",
-        choice1: "Dubai",
-        choice2: "New York",
-        choice3: "Shanghai",
-        choice4: "None of the above",
-        answer: 1,
-    },
-    {
-        question: "What percent of American adults believe that chocolate milk comes from brown cows?",
-        choice1: "20%",
-        choice2: "18%",
-        choice3: "7%",
-        choice4: "33%",
+        question: 'JavaScript is a ___-side programming language?',
+        choice1: 'Client',
+        choice2: 'Server',
+        choice3: 'Both',
+        choice4: 'None',
         answer: 3,
     },
     {
-        question: "Approximately what percent of U.S. power outages are caused by squirrels?",
-        choice1: "10-20%",
-        choice2: "5-10%",
-        choice3: "15-20%",
-        choice4: "30%-40%",
+        question:
+            "Inside which HTML element do we put the JavaScript?",
+        choice1: "<script>",
+        choice2: "<javascript>",
+        choice3: "<scripting>",
+        choice4: "<js>",
+        answer: 1,
+    },
+    {
+        question: "Where is the correct place to insert a JavaScript?",
+        choice1: "The <head> section",
+        choice2: "The <body> section",
+        choice3: "Both the <head> and the <body> section are correct",
+        choice4: "None of the above",
+        answer: 3,
+    },
+    {
+        question: "How do you create a function in JavaScript?",
+        choice1: "call function myFunction()",
+        choice2: "call myFunction()",
+        choice3: "myFunction()",
+        choice4: "None of the above",
+        answer: 3,
+    },
+    {
+        question: "How to write an IF statement for executing some code if i is NOT equal to 5?",
+        choice1: "if (i != 5)",
+        choice2: "if i =! 5 then",
+        choice3: "if i <> 5",
+        choice4: "if (i <> 5)",
+        answer: 1,
+    },
+    {
+        question: "How does a WHILE loop start?",
+        choice1: "while i = 1 to 10",
+        choice2: "while (i <= 10)",
+        choice3: "while (i <= 10; i++)",
+        choice4: "None of the above",
+        answer: 2,
+    },
+    {
+        question: "How does a FOR loop start?",
+        choice1: "for (i = 0; i <= 5)",
+        choice2: "for (i = 0; i <= 5)",
+        choice3: "for i = 1 to 5",
+        choice4: "for (i = 0; i <= 5; i++)",
+        answer: 4,
+    },
+    {
+        question: "How do you round the number 7.25, to the nearest integer?",
+        choice1: "rnd(7.25)",
+        choice2: "Math.round(7.25)",
+        choice3: "Math.rnd(7.25)",
+        choice4: "round(7.25)",
+        answer: 2,
+    },
+    {
+        question: "How do you find the number with the highest value of x and y?",
+        choice1: "Math.ceil(x, y)",
+        choice2: "top(x, y)",
+        choice3: "ceil(x, y)",
+        choice4: "Math.max(x, y)",
+        answer: 4,
+    },
+    {
+        question: "Which event occurs when the user clicks on an HTML element?",
+        choice1: "onclick",
+        choice2: "onmouseover",
+        choice3: "onchange",
+        choice4: "onmouseclick",
         answer: 1,
     }
 ]
+// stores quiz questions, each containing the question, choices, and the correct answer
 
 const SCORE_POINTS = 100
-const MAX_QUESTIONS = 4
+const MAX_QUESTIONS = 10
 
 startGame = () => {
     questionCounter = 0
@@ -61,11 +110,12 @@ startGame = () => {
     startTimer()
     getNewQuestion()
 }
+// initializes quiz, rests counter and score, starts the timer, and calls getNewQuestion
 
 function startTimer() {
     timerInterval = setInterval(updateTimer, 1000);
   }
-
+// sets an interval to update the timer element
   function updateTimer() {
     timeRemaining--
     timerElement.innerText = `Time: ${timeRemaining}`
@@ -79,24 +129,28 @@ function startTimer() {
           }
     }
     if (timeRemaining <= 0) {
-        clearInterval(timerInterval);
+        clearInterval(timerInterval)
         endQuiz();
       }
   }
-
+// decreases time for wrong answers and handles end of the quiz when timer runs out
   function endQuiz() {
-    clearInterval(timerInterval);
-    acceptingAnswers = false;
+    clearInterval(timerInterval)
+    acceptingAnswers = false
+    window.location.assign('/end.html') // Redirect to end.html
   }
-
-getNewQuestion = () => {
+// when the quiz ends it clears timer interval, prevents further answers, and redirects to end.html
+  function getNewQuestion() {
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score)
 
         return window.location.assign('/end.html')
     }
 
-    if (availableQuestions.length > 0)
+    if (timeRemaining <= 0) {
+        endQuiz();
+        return;
+      }
     
     questionCounter++
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
@@ -114,10 +168,10 @@ getNewQuestion = () => {
 
     acceptingAnswers = true
 }
-
+// retrieves a new question from availableQuestions array, updates the question counter and progress text, and fills question and choices
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
-        if(!acceptingAnswers) return
+        if (!acceptingAnswers || timeRemaining <= 0) return;
 
         acceptingAnswers = false
         const selectedChoice = e.target
@@ -143,10 +197,11 @@ choices.forEach(choice => {
         }, 1000)
     })
 })
-
+// adds eventlisteners, checks if answer is correct or incorrect, applies css classes to the slected choice to indictate correctness then removes them
 incrementScore = num => {
     score +=num
     scoreText.innerText = score
 }
-
+//updates the score and displays it in the html element
 startGame()
+//STARTS THE QUIZ
